@@ -40,5 +40,6 @@ public class FirstDemo {
         ch = '0';
         System.out.println(ch+1);
         System.out.println(ch+'1');
+
     }
 }
