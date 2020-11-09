@@ -13,5 +13,8 @@ public class Main {
         System.out.println('a');
         System.out.println(123.23);
         System.out.println(123);
+        /*
+        以上写法是字面量的写法
+        */
     }
 }
