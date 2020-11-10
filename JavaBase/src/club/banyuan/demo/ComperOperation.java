@@ -13,6 +13,7 @@ public class ComperOperation {
       * */
         int num1 = 12;
         int num2 = 13;
+        int num3 = 11;
         double dou1 = 14;
         System.out.println(num1>num2);
         System.out.println(num1>=num2);
@@ -105,6 +106,6 @@ public class ComperOperation {
         * 0011 1111 1111 1111 1111 1111 1111 1110 移位的结果
         * */
 
-        System.out.println( ( (num1 > num2) ? (num1) : (num2) ) );
+        System.out.println( (num1 > num2 ? num1 : num2)>num3 ? (num1 > num2 ? num1 : num2):num3);
     }
 }
