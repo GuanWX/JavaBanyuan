@@ -15,7 +15,7 @@ public class homework_11_10 {
         Scanner scanner2 = new Scanner(System.in);
         System.out.print("Please input day:");
         int day = scanner2.nextInt();
-        ountDay(2020,month,day);
+        CountDay(2020,month,day);
 
         System.out.println("-------------------");
         Scanner scanner3 = new Scanner(System.in);
