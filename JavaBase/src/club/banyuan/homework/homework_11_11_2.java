@@ -8,6 +8,9 @@ import java.util.Scanner;
  * @date 2020/11/11 9:52 下午
  */
 public class homework_11_11_2 {
+    /*
+    * 定义一个全局的数组定义数据,
+    * */
     static double[][] arr ={
             {1,0,49.5},
             {1.3,50,59.5},
