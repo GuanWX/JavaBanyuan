@@ -1,5 +1,7 @@
 package club.banyuan.homework;
 
+import java.util.Arrays;
+
 /**
  * @author edz
  * @version 1.0
@@ -8,9 +10,12 @@ package club.banyuan.homework;
 public class Student {
     private String stuName;
     private int stuId;
-    private double stuScore;
     private String stuAddress;
-    public Student(String stuName, int stuId, double stuScore, String stuAddress){
+    /** TODO 学科。
+     */
+    private subject [] subjects=new subject[3];
+
+    public Student(String stuName, int stuId, String stuAddress, subject[] subjects){
         if (stuName.length() < 20 && stuName.length() > 0) {
             this.stuName = stuName;
         }else {
@@ -21,16 +26,12 @@ public class Student {
         }else {
             System.out.println("ID格式不合法，请输入0——1000之间的数字");
         }
-        if (stuScore >= 0 && stuScore <= 100) {
-            this.stuScore=stuScore;
-        }else{
-            System.out.println("输入的分数不合法，请输入0-100之间的数字");
-        }
         if (stuAddress.length() <= 150) {
             this.stuAddress = stuAddress;
         }else {
             System.out.println("输入的地址请不要超过150个字符");
         }
+        this.subjects=subjects;
     }
 
     public void setStuName(String stuName) {
@@ -57,18 +58,6 @@ public class Student {
         return stuId;
     }
 
-    public void setStuScore(double stuScore) {
-        if (stuScore >= 0 && stuScore <= 100) {
-            this.stuScore=stuScore;
-        }else{
-            System.out.println("输入的分数不合法，请输入0-100之间的数字");
-        }
-    }
-
-    public double getStuScore() {
-        return stuScore;
-    }
-
     public void setStuAddress(String stuAddress) {
         if (stuAddress.length() <= 150) {
             this.stuAddress = stuAddress;
@@ -82,17 +71,22 @@ public class Student {
     }
 
     public String getInfo() {
-        return "名字是："+stuName+"\tID是："+stuId+"\t分数是："+stuScore+"\t家庭住址："+stuAddress;
+        return "名字是："+stuName+"\tID是："+stuId+"\t家庭住址："+stuAddress;
     }
 
+    /**
+     * 调用print(Student)时可以直接返回以下值，
+     * print()会调用valueof();
+     * valueof()会调用toString(),重写toString可以直接返回以下值
+     *
+     * */
     @Override
-    public String toString(){
-        //调用print(Student)时可以直接返回以下值，
-        /**
-         * print()会调用valueof();
-         * valueof()会调用toString(),重写toString可以直接返回以下值
-         *
-         * */
-        return "名字是："+stuName+"\tID是："+stuId+"\t分数是："+stuScore+"\t家庭住址："+stuAddress;
+    public String toString() {
+        return "Student{" +
+                "stuName='" + stuName + '\'' +
+                ", stuId=" + stuId +
+                ", stuAddress='" + stuAddress + '\'' +
+                ", subjects=" + Arrays.toString(subjects) +
+                '}';
     }
 }
