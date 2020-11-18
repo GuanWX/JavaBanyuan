@@ -11,8 +11,6 @@ public class Student {
     private String stuName;
     private int stuId;
     private String stuAddress;
-    /** TODO 学科。
-     */
     private subject [] subjects=new subject[3];
 
     public Student(String stuName, int stuId, String stuAddress, subject[] subjects){

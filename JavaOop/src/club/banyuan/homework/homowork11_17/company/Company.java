@@ -1,5 +1,7 @@
 package club.banyuan.homework.homowork11_17.company;
 
+import java.util.Arrays;
+
 /**
  * @author edz
  * @version 1.0
@@ -56,4 +58,10 @@ public class Company {
         return sum;
     }
 
+    @Override
+    public String toString() {
+        return "Company{" +
+                "employee=" + Arrays.toString(employee) +
+                '}';
+    }
 }

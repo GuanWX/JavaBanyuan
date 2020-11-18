@@ -13,7 +13,6 @@ public class Fridge {
     Elephant temp = elephant;
     elephant=null;
     return temp;
-
   }
 
   void printFridgeInfo() {
@@ -51,7 +50,7 @@ public class Fridge {
   }
   public void store(Lion lion){
     //TODO
-    if(lion == null && this.elephant == null){
+    if(this.lion == null && elephant == null){
       this.lion = lion;
     }else {
       System.out.println("冰箱已经满了！");

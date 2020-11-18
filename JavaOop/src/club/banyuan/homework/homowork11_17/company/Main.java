@@ -14,5 +14,8 @@ public class Main {
         company.addEmployee(196,"D",10000);
         company.printAll();
         System.out.println(company.sumPrice());
+        System.out.println(company);
+        company.deleteEmployee("A");
+        System.out.println(company);
     }
 }

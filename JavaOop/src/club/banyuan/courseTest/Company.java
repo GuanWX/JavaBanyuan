@@ -41,7 +41,6 @@ public class Company {
     }
 
     public String getBoss() {
-        // TODO
         return Boss.toString();
     }
 

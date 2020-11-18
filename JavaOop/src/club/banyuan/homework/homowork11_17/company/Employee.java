@@ -31,4 +31,13 @@ public class Employee {
     public double computePrice(){
         return basePrice+(workTime-196)*200;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "workTime=" + workTime +
+                ", name='" + name + '\'' +
+                ", basePrice=" + basePrice +
+                '}';
+    }
 }
