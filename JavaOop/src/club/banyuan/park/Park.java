@@ -9,16 +9,21 @@ import java.util.Arrays;
  */
 public class Park {
     /** 停车场的默认大小是100个车位，可以通过构造函数进行修改*/
+    private int maxSize;
+    Car [] cars;
 
-    private int maxSize=100;
-    Car [] cars = new Car[maxSize];
-
+    public Park(){
+        // this() 表示调用类的有参构造器，this()前面的不能有任何语句，this()必须在第一个位置
+        this(100);
+    }
     public Park(int maxSize) {
         this.maxSize = maxSize;
         cars  = new Car[maxSize];
     }
-
-    public Park(){
+    /**
+     * 构造代码块，默认在所有构造器前执行*/
+    {
+        System.out.println("构造一个停车场");
     }
 
     public int getMaxSize() {

@@ -65,7 +65,7 @@ public class Hammer {
     }
 }
 
-class Test{
+ class Test{
     public static void main(String[] args) {
         Hammer hammer1=new Hammer();
         System.out.println(hammer1.getInfo());
