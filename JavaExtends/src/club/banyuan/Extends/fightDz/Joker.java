@@ -1,20 +1,16 @@
-package club.banyuan.demo;
-
-import java.util.Arrays;
+package club.banyuan.Extends.fightDz;
 
 /**
- * @author gwx
+ * @author edz
  * @version 1.0
- * @date 2020/11/13 下午2:19
+ * @date 2020/11/23 3:32 下午
  */
-public class TestDemo {
-    /**
-     * 这个Demo的意义是用来写作业代码，没有特殊的含义，只是为了利用idea这个工具
-     **/
-    public static void main(String[] args) {
-        String[] str1 = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-        String[] str2 = {"黑桃","红桃","梅花","方片"};
-        String[] jokers = new String[54];
+public class Joker {
+    private final String[] str1 = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+    private final String[] str2 = {"♠","♥","♣️","♦️"};
+    String[] jokers = new String[54];
+
+    public void newJoker(){
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 4; j++) {
                 jokers[i*4+j]=str2[j]+str1[i];
@@ -22,7 +18,8 @@ public class TestDemo {
         }
         jokers[52]="小王";
         jokers[53]="大王";
-        System.out.println(Arrays.toString(jokers));
+    }
+    public void randomJoker(){
         double[] index = new double[54];
         double temp1;
         String temp2;
@@ -42,9 +39,9 @@ public class TestDemo {
                 }
             }
         }
+    }
 
-        System.out.println(Arrays.toString(index));
-        System.out.println(Arrays.toString(jokers));
-
+    public String[] getJokers() {
+        return jokers;
     }
 }
