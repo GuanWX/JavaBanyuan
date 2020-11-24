@@ -21,13 +21,7 @@ public class Phoy {
      * 弊端：如果子类有自己的行为或者属性，那么父类就不能直接使用
      *
      * */
-    static void me(){
-        System.out.println(1);
-    }
-
     public static void main(String[] args) {
-        Phoy.me();
-        Phoy phoy = new Phoy();
-
+        System.out.println(1);
     }
 }
