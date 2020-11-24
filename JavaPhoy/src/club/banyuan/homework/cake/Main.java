@@ -34,7 +34,7 @@ public class Main {
         double quantity=0;
         ReadyMadeCake readyMadeCake ;
         for (int i =0;i< cakes.length;i++){
-            if (i%2==0){
+            if (cakes[i] instanceof ReadyMadeCake){
                 res+=cakes[i].calcPrice();
                 readyMadeCake= (ReadyMadeCake)cakes[i];
                 quantity += readyMadeCake.getQuantity();
@@ -54,6 +54,6 @@ public class Main {
             }
         }
         System.out.printf("售价最高的蛋糕是%s总价是%.2f,这种蛋糕是按%s卖的",
-                cakes[i].toString(),cakes[i].calcPrice(), ((i%2==0)?("数量"):("质量")));
+                cakes[i].toString(),cakes[i].calcPrice(), ((cakes[i] instanceof ReadyMadeCake)?("数量"):("质量")));
     }
 }
