@@ -13,12 +13,11 @@ public class LinkedList {
             System.out.print(index+"不合法");
             return null;
         }
-        int count = 0;
-        Node headTemp = this.head;
-        while (headTemp !=null && count++ != index){
-            headTemp=headTemp.next;
+        Node temp = this.head;
+        for (int i = 0; i < index; i++) {
+            temp=temp.getNext();
         }
-        return headTemp;
+        return temp;
     }
     /**
      * 更新指定下标位置的元素
@@ -72,10 +71,8 @@ public class LinkedList {
         }else if (index>0&&index<size()){
             Node res = findNode(index-1);
             Object temp = res.next.object;
-            if (res!=null){
-                res.next = res.next.next;
-                return temp;
-            }
+            res.next = res.next.next;
+            return temp;
         }
         return null;
     }
@@ -94,10 +91,7 @@ public class LinkedList {
             index++;
         }
         Object temp = remove(index);
-        if (o.equals(temp)){
-            return true;
-        }
-        return false;
+        return o.equals(temp);
     }
 
     /**
@@ -121,10 +115,7 @@ public class LinkedList {
      * @return true 空集合， false 集合中包含元素
      */
     boolean isEmpty(){
-        if (head==null){
-            return true;
-        }
-        return false;
+        return head == null;
     }
 
     /**
@@ -161,9 +152,6 @@ class Test{
 
 
         System.out.println(list.set(0,4));
-        System.out.println(list.set(1,3));
-        System.out.println(list.set(2,2));
-        System.out.println(list.set(3,1));
         System.out.println(list.set(4,0));
         list.print();
 

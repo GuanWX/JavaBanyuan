@@ -9,5 +9,11 @@ public class Brid {
     private final int wings = 2;
     private final int legs = 2;
 
+    public int getWings() {
+        return wings;
+    }
 
+    public int getLegs() {
+        return legs;
+    }
 }

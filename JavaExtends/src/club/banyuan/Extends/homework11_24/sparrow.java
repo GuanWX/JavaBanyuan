@@ -5,7 +5,7 @@ package club.banyuan.Extends.homework11_24;
  * @version 1.0
  * @date 2020/11/24 6:54 下午
  */
-public class sparrow {
+public class sparrow extends Brid{
 //    麻雀
     private int age;
     private int weight;

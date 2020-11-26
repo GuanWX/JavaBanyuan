@@ -17,9 +17,9 @@ public abstract class Traffic {
 class Test{
      public static void main(String[] args) {
           Traffic[] traffic  = new Traffic[3];
-          traffic[0] = new BusImpl();
-          traffic[1]  = new trainImpl();
-          traffic[2] = new planImpl();
+          traffic[0] = new Bus();
+          traffic[1]  = new train();
+          traffic[2] = new plan();
 
           String [] name = {"小明","小王","小李"};
           for (int i = 0; i < 3; i++) {

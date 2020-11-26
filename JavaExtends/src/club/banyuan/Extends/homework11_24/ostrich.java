@@ -5,7 +5,7 @@ package club.banyuan.Extends.homework11_24;
  * @version 1.0
  * @date 2020/11/24 6:55 下午
  */
-public class ostrich {
+public class ostrich extends Brid{
     //鸵鸟
     private int height;
     private double speed;
