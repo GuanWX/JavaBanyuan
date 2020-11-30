@@ -1,11 +1,6 @@
 package club.banyuan.demo;
 
-import javax.xml.crypto.Data;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
+import java.util.Scanner;
 
 /**
  * @author gwx
@@ -13,12 +8,24 @@ import java.util.Random;
  * @date 2020/11/13 下午2:19
  */
 public class TestDemo {
-    public static void main(String[] args) throws ParseException {
-
-        String str1 = "I am a boy!";
-
-        System.out.println(str1.substring(3));
-
-
+    public static int method(){
+        Scanner scanner = new Scanner(System.in);
+        int age ;
+        try{
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            age = a/b;
+            return age;
+        }catch (Exception e){
+            e.printStackTrace();
+            age =2;
+            return age;
+        }finally {
+            age = 3;
+            //return age;
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println(method());
     }
 }
