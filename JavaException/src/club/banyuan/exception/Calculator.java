@@ -37,6 +37,7 @@ public class Calculator {
    */
   public static int compute(String[] tokens) throws CalculatorException {
     // 不同符号数量的各种情况
+    int a , b;
     switch (tokens.length) {
       case 0:
         // TODO: complete the cases
@@ -53,21 +54,27 @@ public class Calculator {
       case 2:
         // 只有一种情况，用户输入 负数
         // TODO: complete the cases
-        Integer res = Check(tokens[1]);
-        if (tokens[0].equals("-")&& res!=null){
-          return -res;
+         try {
+           a = Integer.parseInt(tokens[1]);
+         }catch (NumberFormatException e){
+           throw new IllegalInputException("Illegal input : Illegal Argument");
+         }
+        if (tokens[0].equals("-")){
+          return -a;
         }else {
           throw new IllegalInputException("Illegal input : Illegal Argument");
         }
       case 3:
         // 计算表达式
         // TODO: complete the cases
-        Integer a =Check(tokens[0]);
-        Integer b =Check(tokens[2]);
-        if (a==null || b == null){
+        try{
+          a = Integer.parseInt(tokens[0]);
+          b = Integer.parseInt(tokens[2]);
+        }catch (NumberFormatException e){
           throw new IllegalInputException("Illegal input : Illegal Argument");
-        } else if (tokens[1].equals("+") || tokens[1].equals("-") || tokens[1].equals("/") || tokens[1].equals("*")){
-          if (tokens[1].equals("/") && b.equals(0)){
+        }
+        if (tokens[1].equals("+") || tokens[1].equals("-") || tokens[1].equals("/") || tokens[1].equals("*")){
+          if (tokens[1].equals("/") && b==0){
             throw new DivideByZeroException("Tried to divide by zero");
           }else{
             switch (tokens[1]){
@@ -90,18 +97,6 @@ public class Calculator {
         // TODO: complete the cases
         throw new IllegalInputException("Illegal input : Illegal Token Length");
     }
-  }
-  public static Integer Check(String str){
-    char[] chars = str.toCharArray();
-    Integer integer = 0;
-    for (char c : chars) {
-      if (Character.isDigit(c)){
-        integer = integer*10+((int)c-48);
-      }else {
-        return null;
-      }
-    }
-    return integer;
   }
 
   /**
