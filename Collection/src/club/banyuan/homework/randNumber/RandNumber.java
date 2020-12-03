@@ -1,9 +1,6 @@
 package club.banyuan.homework.randNumber;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -32,7 +29,12 @@ public class RandNumber{
         System.out.println();
     }
     public void sort(){
-        arrayList.sort(null);
+        arrayList.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
     }
 }
 class Test{
