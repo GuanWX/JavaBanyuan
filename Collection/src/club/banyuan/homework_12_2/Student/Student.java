@@ -1,5 +1,7 @@
 package club.banyuan.homework_12_2.Student;
 
+import com.sun.source.util.Trees;
+
 import java.util.*;
 
 /**
@@ -7,7 +9,7 @@ import java.util.*;
  * @version 1.0
  * @date 2020/12/2 4:37 下午
  */
-public class Student{
+public class Student implements Comparable{
     private String id;
     private String name;
     private int age;
@@ -67,9 +69,14 @@ public class Student{
                 '}';
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Student student = (Student) o;
+        return this.getId().compareTo(student.getId());
+    }
 }
 class TestStu{
-    static LinkedHashSet<Student> students = new LinkedHashSet<>();
+    static TreeSet<Student> students = new TreeSet<>();
     public static void main(String[] args) {
         ArrayList<Student> temp = new ArrayList<>();
         temp.add(new Student("B004","烟囱",23));
@@ -102,23 +109,37 @@ class TestStu{
         System.out.println("\n");
     }
     public static void sortById(){
-        List list = Arrays.asList(students.toArray());
-        list.sort(new Comparator<Student>() {
-            @Override
-            public int compare(Student o1, Student o2) {
-                return o1.getId().compareTo(o2.getId());
-            }
-        });
-        students = new LinkedHashSet<>(list);
+
+        // 使用LinkedHashSet
+//        List list = Arrays.asList(students.toArray());
+//        list.sort(new Comparator<Student>() {
+//            @Override
+//            public int compare(Student o1, Student o2) {
+//                return o1.getId().compareTo(o2.getId());
+//            }
+//        });
+//        students = new LinkedHashSet<>(list);
+        TreeSet<Student> temp = new TreeSet<>();
+        temp.addAll(students);
+        students = temp;
     }
     public static void sortByAge(){
-        List list = Arrays.asList(students.toArray());
-        list.sort(new Comparator<Student>() {
+        // 使用LinkedHashSet
+//        List list = Arrays.asList(students.toArray());
+//        list.sort(new Comparator<Student>() {
+//            @Override
+//            public int compare(Student o1, Student o2) {
+//                return o2.getAge()-o1.getAge();
+//            }
+//        });
+//        students = new LinkedHashSet<>(list);
+        TreeSet<Student> temp = new TreeSet<>(new Comparator<Student>() {
             @Override
             public int compare(Student o1, Student o2) {
                 return o2.getAge()-o1.getAge();
             }
         });
-        students = new LinkedHashSet<>(list);
+        temp.addAll(students);
+        students = temp;
     }
 }

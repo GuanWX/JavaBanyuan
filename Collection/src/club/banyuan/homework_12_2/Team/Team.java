@@ -1,6 +1,7 @@
 package club.banyuan.homework_12_2.Team;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,8 +10,8 @@ import java.util.List;
  * @date 2020/12/2 6:25 下午
  */
 public class Team {
-    static List<Player> playersStarting = new ArrayList<>();
-    static List<Player> playersSubstitute = new ArrayList<>();
+    static List<Player> playersStarting = new LinkedList<>();
+    static List<Player> playersSubstitute = new LinkedList<>();
     public static boolean deletePlayer(List<Player> list,Player player) throws RuntimeException{
         if (player==null || list==null || list.size()==0)
             throw new NullPointerException("Player or List is NULL!!");
