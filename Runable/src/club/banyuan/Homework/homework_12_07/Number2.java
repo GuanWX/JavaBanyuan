@@ -1,5 +1,6 @@
 package club.banyuan.Homework.homework_12_07;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -9,8 +10,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2020/12/7 6:55 下午
  */
 public class Number2 {
-    final static Lock LOCK1 = new ReentrantLock();
-    //    final static Lock LOCK2 = new ReentrantLock();
+    static CountDownLatch latch1 = new CountDownLatch(2);
+    static CountDownLatch latch2 = new CountDownLatch(2);
     static int i = 0;
     public static void main(String[] args) {
         Object waitObject1 = new Object();
@@ -24,6 +25,7 @@ public class Number2 {
             synchronized (waitObject2){
                 i ++;
                 System.out.println(Thread.currentThread().getName() + " : "+ i);
+                latch1.countDown();
             }
         };
         Runnable runnable2 = () -> {
@@ -35,6 +37,7 @@ public class Number2 {
             synchronized (waitObject2){
                 i --;
                 System.out.println(Thread.currentThread().getName() + " : "+ i);
+                latch2.countDown();
             }
         };
         Thread thread1 = new Thread(() -> {
@@ -50,8 +53,7 @@ public class Number2 {
                 threadA.start();
                 threadB.start();
                 try {
-                    threadA.join();
-                    threadB.join();
+                    latch1.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -69,8 +71,7 @@ public class Number2 {
                 threadC.start();
                 threadD.start();
                 try {
-                    threadC.join();
-                    threadD.join();
+                    latch2.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

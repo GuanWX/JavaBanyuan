@@ -10,7 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Number {
     final static Lock LOCK1 = new ReentrantLock();
-//    final static Lock LOCK2 = new ReentrantLock();
     static int i = 0;
     public static void main(String[] args) {
         Object waitObject1 = new Object();

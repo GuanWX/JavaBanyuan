@@ -32,6 +32,11 @@ public class Print {
             @Override
             public void run() {
                 synchronized (waitObject){
+                    try {
+                        waitObject.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     while(c<='Z'){
                         System.out.print(c++ +"\t");
                         waitObject.notify();
@@ -47,8 +52,8 @@ public class Print {
         };
         Thread thread1 = new Thread(runnable1);
         Thread thread2 = new Thread(runnable2);
-        thread1.start();
         thread2.start();
+        thread1.start();
     }
 
 }
