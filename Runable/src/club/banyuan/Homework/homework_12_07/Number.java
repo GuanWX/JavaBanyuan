@@ -12,7 +12,6 @@ public class Number {
     final static Lock LOCK1 = new ReentrantLock();
     static int i = 0;
     public static void main(String[] args) {
-        Object waitObject1 = new Object();
         Object waitObject2 = new Object();
         Runnable runnable1 = () -> {
             try {
@@ -42,19 +41,19 @@ public class Number {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (LOCK1.tryLock()){
-                Thread threadA = new Thread(runnable1, "A");
-                Thread threadB = new Thread(runnable1, "B");
-                threadA.start();
-                threadB.start();
-                try {
-                    threadA.join();
-                    threadB.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                LOCK1.unlock();
+            LOCK1.lock();
+            Thread threadA = new Thread(runnable1, "A");
+            Thread threadB = new Thread(runnable1, "B");
+            threadA.start();
+            threadB.start();
+            try {
+                threadA.join();
+                threadB.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            LOCK1.unlock();
+
         });
         Thread thread2 = new Thread(() -> {
             try {
@@ -62,19 +61,18 @@ public class Number {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (LOCK1.tryLock()){
-                Thread threadC = new Thread(runnable2, "C");
-                Thread threadD = new Thread(runnable2, "D");
-                threadC.start();
-                threadD.start();
-                try {
-                    threadC.join();
-                    threadD.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                LOCK1.unlock();
+            LOCK1.lock();
+            Thread threadC = new Thread(runnable2, "C");
+            Thread threadD = new Thread(runnable2, "D");
+            threadC.start();
+            threadD.start();
+            try {
+                threadC.join();
+                threadD.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            LOCK1.unlock();
         });
 
         thread1.start();

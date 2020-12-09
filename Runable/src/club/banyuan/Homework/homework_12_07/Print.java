@@ -1,11 +1,14 @@
 package club.banyuan.Homework.homework_12_07;
 
+import club.banyuan.Semaphore.Thread2;
+
 /**
  * @author edz
  * @version 1.0
  * @date 2020/12/7 4:42 下午
  */
 public class Print {
+    public static boolean flag = false;
     public static void main(String[] args) {
         Object waitObject = new Object();
         Runnable runnable1 = new Runnable() {
@@ -13,6 +16,9 @@ public class Print {
             @Override
             public void run() {
                 synchronized (waitObject){
+                    if (!flag){
+                        flag = true ;
+                    }
                     while (key < 52) {
                         System.out.print(++key);
                         System.out.print(++key);
@@ -33,7 +39,9 @@ public class Print {
             public void run() {
                 synchronized (waitObject){
                     try {
-                        waitObject.wait();
+                        if (!flag){
+                            waitObject.wait();
+                        }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -52,8 +60,8 @@ public class Print {
         };
         Thread thread1 = new Thread(runnable1);
         Thread thread2 = new Thread(runnable2);
-        thread2.start();
         thread1.start();
+        thread2.start();
     }
 
 }
