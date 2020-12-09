@@ -35,6 +35,8 @@ public class command {
                 CP cp = new CP();
                 cp.cp(com[1],com[2]);
             }else if (com[0].equals("rm")&&com.length==2){
+                // 删除只能删除代码中固定的文件夹，防止误操作导致删除必要的文件
+                // 创建文件夹请直接运行 src/club/banyuan/Demo/test.sh 脚本
                 Del del = new Del();
                 del.rm("/Users/edz/Desktop/test");
             }

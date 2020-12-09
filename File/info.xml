@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <student ID="1"> 
+    <name>张三</name>  
+    <age>12</age>  
+    <address>栖霞区</address> 
+  </student>  
+  <student ID="2"> 
+    <name>李四</name>  
+    <age>13</age>  
+    <address>玄武区</address> 
+  </student>  
+  <student ID="3"> 
+    <name>老牛</name>  
+    <age>16</age>  
+    <address>秦淮区</address> 
+  </student>  
+  <student ID="4">
+    <name>管文轩</name>
+    <age>22</age>
+    <address>栖霞区</address>
+  </student>
+</root>
+<!--
+  <根节点>
+      <子节点>
+          <子节点>
+              <子节点>内容(文本节点)</子节点>
+
+-->
