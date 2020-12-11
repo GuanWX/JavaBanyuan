@@ -3,6 +3,7 @@ package club.banyuan.JSON;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -25,7 +26,9 @@ public class Json {
         users.add(user2);
 
         File file = new File("java-banyuan/File/test.json");
-        String s = JSONObject.toJSONString(users);
+        String s = JSONObject.toJSONString(users,SerializerFeature.PrettyFormat,// 格式
+                SerializerFeature.WriteMapNullValue, // 为空也会输出
+                SerializerFeature.WriteDateUseDateFormat);
         try {
             if (!file.exists()){
                 file.createNewFile();
@@ -37,9 +40,18 @@ public class Json {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try( InputStream inputStream = new FileInputStream(file);
+        BufferedInputStream buffer = new BufferedInputStream(inputStream)) {
+            byte[] bytes = buffer.readAllBytes();
+            String s1 = new String(bytes);
+            List<User> users1 = JSONObject.parseArray(s1, User.class);
+            System.out.println(users1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
-class User{
+class User implements Serializable{
     private String name;
     private int age;
     private List<Food> foods;
@@ -86,7 +98,7 @@ class User{
                 '}';
     }
 }
-class Food{
+class Food implements Serializable{
     private String name;
     private double price;
 

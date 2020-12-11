@@ -3,7 +3,6 @@ package club.banyuan.Homwork.Homwork12_09_2;
 import club.banyuan.Homwork.Homwork12_09_1.copy;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.Scanner;
 
 /**

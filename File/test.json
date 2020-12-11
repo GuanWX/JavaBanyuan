@@ -1,1 +1,21 @@
-[{"age":22,"foods":[{"name":"奶茶","price":20.5},{"name":"煎饼","price":7.5}],"name":"管文轩"},{"age":23,"name":"烟囱"}]
+[
+	{
+		"age":22,
+		"foods":[
+			{
+				"name":"奶茶",
+				"price":20.5
+			},
+			{
+				"name":"煎饼",
+				"price":7.5
+			}
+		],
+		"name":"管文轩"
+	},
+	{
+		"age":23,
+		"foods":null,
+		"name":"烟囱"
+	}
+]
