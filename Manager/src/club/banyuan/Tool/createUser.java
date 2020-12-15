@@ -1,7 +1,6 @@
 package club.banyuan.Tool;
 
 import club.banyuan.structure.User;
-import club.banyuan.structure.UserType;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 

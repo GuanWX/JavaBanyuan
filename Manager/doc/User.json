@@ -1,0 +1,18 @@
+[
+	{
+		"id":2,
+		"name":"wen",
+		"pwd":"654321",
+		"pwdConfirm":"654321",
+		"userType":1,
+		"userTypeStr":"经理"
+	},
+	{
+		"id":10,
+		"name":"guan",
+		"pwd":"123456",
+		"pwdConfirm":"123456",
+		"userType":0,
+		"userTypeStr":"客户"
+	}
+]

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <root>
-<basepath>/Users/edz/Desktop/banyuan/git/java-banyuan/Manager/doc/pages</basepath>
-<port>19002</port>
+    <basepath>/Users/edz/Desktop/banyuan/git/java-banyuan/Manager/doc/pages</basepath>
+    <port>19002</port>
+    <UserCount>2</UserCount>
 </root>

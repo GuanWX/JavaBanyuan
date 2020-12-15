@@ -1,8 +1,11 @@
 package club.banyuan.http;
 
 import club.banyuan.Tool.Config;
+import club.banyuan.Tool.LOCK;
 import club.banyuan.UserServer.AddUser;
+import club.banyuan.UserServer.DelUser;
 import club.banyuan.UserServer.ListUser;
+import club.banyuan.UserServer.UpdataUser;
 import club.banyuan.login.Login;
 
 import java.io.*;
@@ -35,7 +38,17 @@ public class ServerRes implements Runnable{
                     new ListUser().list(socket, request.getData());
                     break;
                 case "/server/user/add":
-                    new AddUser().addUser(socket, request.getData());
+                    synchronized (LOCK.USERLOCK){
+                        new AddUser().addUser(socket, request.getData());
+                    }
+                    break;
+                case "/server/user/delete":
+                    synchronized (LOCK.USERLOCK){
+                        new DelUser().delUser(socket, request.getData());
+                    }
+                    break;
+                case "/server/user/get":
+                    new UpdataUser().getUser(socket, request.getData());
                     break;
             }
         }else {
@@ -46,7 +59,6 @@ public class ServerRes implements Runnable{
                 File file404 = new File(Config.BasePath+"/404.html");
                 Return.returnFile(socket,file404);
             }
-
         }
     }
 }

@@ -20,7 +20,7 @@ public class User {
     }
 
     public User(String name, String pwd, int userType, String userTypeStr) {
-        this.id = Config.UserCount++;
+        this.id = ++Config.UserCount;
         this.name = name;
         this.pwd = pwd;
         this.pwdConfirm=pwd;
