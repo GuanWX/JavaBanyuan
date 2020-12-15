@@ -1,6 +1,8 @@
 package club.banyuan.login;
 
 import club.banyuan.Tool.Config;
+import club.banyuan.Tool.UserOnLine;
+import club.banyuan.UserServer.UserServer;
 import club.banyuan.http.Return;
 import club.banyuan.structure.User;
 import com.alibaba.fastjson.JSONObject;
@@ -20,31 +22,32 @@ public class Login {
     public Login() {
     }
 
-    public void login(Socket socket,String data){
-        File file = new File("java-banyuan/Manager/User.json");
-        try {
-            final JSONObject jsonObject = JSONObject.parseObject(data);
-            InputStream in = new FileInputStream(file);
-            byte[] bytes = in.readAllBytes();
-            String s = new String(bytes);
-            List<User> users = JSONObject.parseArray(s, User.class);
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getName().equals(jsonObject.getString("name"))&&
-                        users.get(i).getPwd().equals(jsonObject.getString("pwd"))){
-                    DataOutputStream Out = new DataOutputStream(socket.getOutputStream());
-                    Out.writeBytes("\n");
-                    Out.writeBytes("HTTP/1.1 200 ok\n");
-                    Out.flush();
-                    Out.close();
-                    socket.close();
-                    return;
-                }
-            }
-            Map<String, String> result = new HashMap<>();
-            result.put("data","用户名或密码错误");
+    public void login(Socket socket,String data,String hostname){
+        List<User> users = new UserServer().getUsers();
+
+        final JSONObject jsonObject = JSONObject.parseObject(data);
+        final String name = jsonObject.getString("name");
+        final String pwd = jsonObject.getString("pwd");
+        Map<String, String> result = new HashMap<>();
+        if (!recordingLogin(hostname,name)){
+            result.put("data","该用户已经登录");
             Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
-        } catch (IOException e) {
-            e.printStackTrace();
+            return;
         }
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getName().equals(name) && users.get(i).getPwd().equals(pwd)){
+                UserOnLine.userOnLine.put(hostname,name);
+                System.out.println(UserOnLine.userOnLine);
+                Return.returnJson(socket,"HTTP/1.1 200 ok\n",null);
+            }
+        }
+        result.put("data","用户名或密码错误");
+        Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
+    }
+    private boolean recordingLogin(String hostname,String Username){
+        if (UserOnLine.userOnLine.containsValue(Username)){
+            return false;
+        }
+        return true;
     }
 }

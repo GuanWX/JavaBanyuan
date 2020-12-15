@@ -51,9 +51,32 @@ public class UserServer {
         result.put("data","操作成功");
         Return.returnJson(socket,"HTTP/1.1 200 ok",result);
     }
-    public boolean Check(String name,String pwd,String pwdConfirm,String userType,Socket socket){
+    public boolean Check(String pwd,String pwdConfirm,String userType,Socket socket){
         Map<String, String> result = new HashMap<>();
-        if ((name.length() * pwd.length()*pwdConfirm.length()*userType.length())==0 ) {
+        if ((pwd.length()*pwdConfirm.length()*userType.length())==0 ) {
+            result.put("data","必填项为空");
+            Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
+            return false;
+        }
+        if (!pwd.equals( pwdConfirm )){
+            result.put("data","两次密码不一致");
+            Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
+            return false;
+        }
+        String match = "^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{6,8}$";
+        if (!pwd.matches(match)){
+            result.put("data","请输入6-8位数字字母混合密码");
+            Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
+            return false;
+        }
+        return true;
+    }
+    public boolean Check(String name,String pwd,String pwdConfirm,String userType,Socket socket){
+        if (!Check(pwd,pwdConfirm,userType,socket)){
+            return false;
+        }
+        Map<String, String> result = new HashMap<>();
+        if (name.length()==0){
             result.put("data","必填项为空");
             Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
             return false;
@@ -64,11 +87,6 @@ public class UserServer {
                 Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
                 return false;
             }
-        }
-        if (!pwd.equals( pwdConfirm )){
-            result.put("data","两次密码不一致");
-            Return.returnJson(socket,"HTTP/1.1 400 bad_request",result);
-            return false;
         }
         return true;
     }

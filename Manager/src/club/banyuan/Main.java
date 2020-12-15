@@ -1,9 +1,10 @@
 package club.banyuan;
 
 import club.banyuan.Tool.Config;
+import club.banyuan.Tool.UserOnLine;
+import club.banyuan.UserServer.UserServer;
 import club.banyuan.http.Server;
 
-import java.util.concurrent.Executors;
 
 /**
  * @author edz
@@ -13,6 +14,8 @@ import java.util.concurrent.Executors;
 public class Main {
     public static void main(String[] args) {
         new Config();
+        new UserServer();
+        new UserOnLine();
         new Thread(new Server()).start();
     }
 }

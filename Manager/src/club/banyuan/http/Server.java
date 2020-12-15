@@ -22,8 +22,6 @@ public class Server implements Runnable {
             ExecutorService pool = Executors.newFixedThreadPool(3);
             while (true){
                 Socket accept = serverSocket.accept();
-//                Thread thread = new Thread(new ServerRes(accept));
-//                thread.start();
                 pool.submit(new ServerRes(accept));
             }
         } catch (IOException e) {

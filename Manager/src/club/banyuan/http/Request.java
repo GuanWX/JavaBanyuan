@@ -57,7 +57,7 @@ public class Request {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String s;
             Url = reader.readLine().split(" ")[1];
-            Host = reader.readLine().split(" ")[1];
+            Host = socket.getInetAddress().getHostAddress();
             System.out.println(socket.getInetAddress().getHostAddress()+" request "+getUrl());
             while ((s= reader.readLine())!=null && s.length()!=0){
                 if (s.startsWith("Content-Length:")){
