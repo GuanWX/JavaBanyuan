@@ -1,14 +1,15 @@
 package club.banyuan.http;
 
+import club.banyuan.ProviderServer.AddProvider;
+import club.banyuan.ProviderServer.DelProvider;
+import club.banyuan.ProviderServer.ListProvider;
+import club.banyuan.ProviderServer.UpdataProvider;
 import club.banyuan.Tool.Config;
 import club.banyuan.Tool.LOCK;
 import club.banyuan.Tool.UserOnLine;
-import club.banyuan.UserServer.AddUser;
-import club.banyuan.UserServer.DelUser;
-import club.banyuan.UserServer.ListUser;
-import club.banyuan.UserServer.UpdataUser;
+import club.banyuan.UserServer.*;
 import club.banyuan.login.Login;
-
+import club.banyuan.login.Quit;
 import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
@@ -33,9 +34,12 @@ public class ServerRes implements Runnable{
         final Request request = new Request(socket);
         String url = request.getUrl();
         if (url.startsWith("/server")){
-            if (UserOnLine.Status(request.getHost()) || url.equals("/server/user/login")){
-                System.out.println(UserOnLine.Status(request.getHost()));
-                DataServer(url,request);
+            if (UserOnLine.Status(request.getHost()) || url.equals("/server/user/login") || url.equals("/server/user/getInfo")){
+                if (url.startsWith("/server/user/")) {
+                    UserServer(url,request);
+                }else if (url.startsWith("/server/provider")){
+                    ProviderServer(url,request);
+                }
             }else {
                 Map<String, String> result = new HashMap<>();
                 result.put("data","请先登录");
@@ -54,7 +58,7 @@ public class ServerRes implements Runnable{
             Return.returnFile(socket,file404);
         }
     }
-    public void DataServer(String url,Request request){
+    public void UserServer(String url,Request request){
         switch (url){
             case "/server/user/login":
                 new Login().login(socket,request.getData(), request.getHost());
@@ -78,6 +82,37 @@ public class ServerRes implements Runnable{
             case "/server/user/update":
                 synchronized (LOCK.USERLOCK){
                     new UpdataUser().updataUser(socket, request.getData());
+                }
+                break;
+            case "/server/user/getInfo":
+                new GetInfo().getInfo(socket);
+                break;
+            case "/server/user/quit":
+                new Quit().quit(socket);
+        }
+    }
+    public void ProviderServer(String url,Request request){
+        switch (url){
+            case "/server/provider/list":
+                new ListProvider().list(socket,request.getData());
+                break;
+            case "/server/provider/add":
+                synchronized (LOCK.PROVIDERLOCK){
+                    new AddProvider().add(socket, request.getData());
+                }
+                break;
+            case "/server/provider/get":
+                new UpdataProvider().get(socket, request.getData());
+                break;
+
+            case "/server/provider/update":
+                synchronized (LOCK.PROVIDERLOCK){
+                    new UpdataProvider().updata(socket, request.getData());
+                }
+                break;
+            case "/server/provider/delete":
+                synchronized (LOCK.PROVIDERLOCK){
+                    new DelProvider().delete(socket, request.getData());
                 }
                 break;
         }

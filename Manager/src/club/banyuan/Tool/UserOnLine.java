@@ -11,9 +11,6 @@ import java.util.Map;
 public class UserOnLine {
     public static Map<String, String> userOnLine = new HashMap<>();
 
-    public Map<String, String> getUserOnLine() {
-        return userOnLine;
-    }
     public static boolean Status(String hostname){
         if (userOnLine==null || userOnLine.size()==0){
             return false;

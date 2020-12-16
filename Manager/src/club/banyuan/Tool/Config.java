@@ -1,5 +1,6 @@
 package club.banyuan.Tool;
 
+import club.banyuan.ProviderServer.ProviderServer;
 import club.banyuan.UserServer.AddUser;
 import club.banyuan.UserServer.UserServer;
 import org.dom4j.Document;
@@ -20,8 +21,10 @@ import java.util.Properties;
 public class Config {
     public static String BasePath;
     public static String UserData;
+    public static String ProviderData;
     public static int Port;
     public static int UserCount;
+    public static int ProviderCount;
     private static final Properties properties = new Properties();
     private static final File file = new File("java-banyuan/Manager/src/app.properties");
     static {
@@ -40,11 +43,13 @@ public class Config {
             properties.load(inputStream);
             BasePath = properties.getProperty("BasePath");
             UserData = properties.getProperty("UserData");
+            ProviderData = properties.getProperty("ProviderData");
             Port = Integer.parseInt(properties.getProperty("port"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         UserCount = new UserServer().findIdMax();
+        ProviderCount = new ProviderServer().findMax();
     }
 
 }

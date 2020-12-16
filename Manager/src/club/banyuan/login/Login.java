@@ -1,13 +1,10 @@
 package club.banyuan.login;
 
-import club.banyuan.Tool.Config;
 import club.banyuan.Tool.UserOnLine;
 import club.banyuan.UserServer.UserServer;
 import club.banyuan.http.Return;
 import club.banyuan.structure.User;
 import com.alibaba.fastjson.JSONObject;
-
-import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +36,7 @@ public class Login {
                 UserOnLine.userOnLine.put(hostname,name);
                 System.out.println(UserOnLine.userOnLine);
                 Return.returnJson(socket,"HTTP/1.1 200 ok\n",null);
+                return;
             }
         }
         result.put("data","用户名或密码错误");

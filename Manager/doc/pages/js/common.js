@@ -74,7 +74,8 @@ function getCurrentUser() {
 
         $("#welcome-user-name").text(result.data);
       } else {
-        alert("查询用户失败");
+        window.location.href = "login.html";
+        // alert("查询用户失败");
       }
     }
   });
