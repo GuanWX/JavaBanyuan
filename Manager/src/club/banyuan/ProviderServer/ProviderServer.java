@@ -21,6 +21,9 @@ public class ProviderServer {
         try (InputStream inputStream = new FileInputStream(file);){
             String s = new String(inputStream.readAllBytes());
             providers = JSONObject.parseArray(s, Provider.class);
+            if (providers == null){
+                providers = new ArrayList<>();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,9 +35,6 @@ public class ProviderServer {
     public int findMax(){
         int result =0;
         int temp ;
-        if (providers==null || providers.size()==0){
-            return 0;
-        }
         for (Provider provider :providers) {
             temp = provider.getId();
             if (temp>result){

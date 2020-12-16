@@ -1,0 +1,16 @@
+[
+	{
+		"contactPerson":"任正非",
+		"desc":"服务器",
+		"id":1,
+		"name":"华为",
+		"phone":"12345678901"
+	},
+	{
+		"contactPerson":"杨震",
+		"desc":"武汉",
+		"id":2,
+		"name":"烽火",
+		"phone":"12345678900"
+	}
+]

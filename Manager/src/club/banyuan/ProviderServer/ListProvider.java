@@ -18,11 +18,16 @@ public class ListProvider {
     public ListProvider() {
     }
     public void list(Socket socket, String data){
-        final JSONObject jsonObject = JSONObject.parseObject(data);
-        final String name = jsonObject.getString("name");
-        final String desc = jsonObject.getString("desc");
-        List<Provider> filters = new ProviderServer().filter(name,desc);
         Map<String, List<Provider>> result = new HashMap<>();
+        List<Provider> filters;
+        if (data ==null ){
+             filters = new ProviderServer().getProviders();
+        }else {
+            final JSONObject jsonObject = JSONObject.parseObject(data);
+            final String name = jsonObject.getString("name");
+            final String desc = jsonObject.getString("desc");
+            filters = new ProviderServer().filter(name,desc);
+        }
         result.put("data",filters);
         Return.returnJson(socket,"HTTP/1.1 200 ok",result);
     }

@@ -1,5 +1,7 @@
 package club.banyuan.http;
 
+import club.banyuan.BillServer.ListBill;
+import club.banyuan.BillServer.UpdataBill;
 import club.banyuan.ProviderServer.AddProvider;
 import club.banyuan.ProviderServer.DelProvider;
 import club.banyuan.ProviderServer.ListProvider;
@@ -39,6 +41,8 @@ public class ServerRes implements Runnable{
                     UserServer(url,request);
                 }else if (url.startsWith("/server/provider")){
                     ProviderServer(url,request);
+                }else if (url.startsWith("/server/bill")){
+                    BillServer(url,request);
                 }
             }else {
                 Map<String, String> result = new HashMap<>();
@@ -114,6 +118,16 @@ public class ServerRes implements Runnable{
                 synchronized (LOCK.PROVIDERLOCK){
                     new DelProvider().delete(socket, request.getData());
                 }
+                break;
+        }
+    }
+    public void BillServer(String url,Request request){
+        switch (url){
+            case "/server/bill/list":
+                new ListBill().listBill(socket,request.getData());
+                break;
+            case "/server/bill/get":
+                new UpdataBill().getBill(socket, request.getData());
                 break;
         }
     }

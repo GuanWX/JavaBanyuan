@@ -14,7 +14,6 @@ import club.banyuan.http.Server;
 public class Main {
     public static void main(String[] args) {
         new Config();
-        new UserServer();
         new UserOnLine();
         new Thread(new Server()).start();
     }
