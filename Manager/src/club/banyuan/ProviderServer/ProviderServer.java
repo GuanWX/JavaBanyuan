@@ -43,6 +43,9 @@ public class ProviderServer {
         }
         return result;
     }
+    public Provider findById(int id){
+        return providers.stream().filter(provider -> provider.getId() == id).findFirst().orElseThrow();
+    }
     public void writeProvider(Socket socket, List<Provider> providersNew){
         final String s = JSONObject.toJSONString(providersNew, SerializerFeature.PrettyFormat,SerializerFeature.WriteMapNullValue);
         try(BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(Config.ProviderData))){

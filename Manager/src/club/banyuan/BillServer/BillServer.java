@@ -8,10 +8,8 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author edz
@@ -68,5 +66,10 @@ public class BillServer {
                     filter(bill -> bill.getIspay()==isPay).forEach(result::add);
         }
         return  result;
+    }
+    public String time(){
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return simpleDateFormat.format(date);
     }
 }

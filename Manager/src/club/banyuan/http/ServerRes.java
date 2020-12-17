@@ -1,17 +1,14 @@
 package club.banyuan.http;
 
-import club.banyuan.BillServer.ListBill;
-import club.banyuan.BillServer.UpdataBill;
-import club.banyuan.ProviderServer.AddProvider;
-import club.banyuan.ProviderServer.DelProvider;
-import club.banyuan.ProviderServer.ListProvider;
-import club.banyuan.ProviderServer.UpdataProvider;
+import club.banyuan.BillServer.*;
+import club.banyuan.ProviderServer.*;
+import club.banyuan.UserServer.*;
 import club.banyuan.Tool.Config;
 import club.banyuan.Tool.LOCK;
 import club.banyuan.Tool.UserOnLine;
-import club.banyuan.UserServer.*;
 import club.banyuan.login.Login;
 import club.banyuan.login.Quit;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
@@ -128,6 +125,21 @@ public class ServerRes implements Runnable{
                 break;
             case "/server/bill/get":
                 new UpdataBill().getBill(socket, request.getData());
+                break;
+            case "/server/bill/update":
+                synchronized (LOCK.BILLLOCK){
+                    new UpdataBill().updataBill(socket, request.getData());
+                }
+                break;
+            case "/server/bill/add":
+                synchronized (LOCK.BILLLOCK){
+                    new AddBill().addBill(socket, request.getData());
+                }
+                break;
+            case "/server/bill/delete":
+                synchronized (LOCK.BILLLOCK){
+                    new DeleteBill().deleteBill(socket, request.getData());
+                }
                 break;
         }
     }

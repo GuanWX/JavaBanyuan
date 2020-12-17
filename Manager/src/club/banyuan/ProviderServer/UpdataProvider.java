@@ -39,10 +39,9 @@ public class UpdataProvider {
     }
     public void get(Socket socket ,String data){
         final ProviderServer providerServer = new ProviderServer();
-        final List<Provider> providers = providerServer.getProviders();
         final JSONObject jsonObject = JSONObject.parseObject(data);
         final int id = Integer.parseInt(jsonObject.getString("id"));
-        final Provider provider1 = providers.stream().filter(provider -> provider.getId() == id).findFirst().orElseThrow();
+        final Provider provider1 = providerServer.findById(id);
         Map<String, Provider> result = new HashMap<>();
         result.put("data",provider1);
         Return.returnJson(socket,"HTTP/1.1 200 ok",result);
